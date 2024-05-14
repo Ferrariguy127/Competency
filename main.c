@@ -24,5 +24,19 @@ int main(void)
   Matrix* matrix2 = matrix_initilization(3, 4, matrix_array2);
   print_matrix(matrix);
 
+  //Function for getting value at set position
+  printf("Element at (1,1): %.2f\n", getMatrixElement(matrix_array1, 1, 1));
+  printf("This line works\n");
+  //freeMatrix(matrix_array1);
+
+//Matrix addition function call
+
+//matrix subtraction function call
+
+//matrix multiplication function call
+
+//matrix rotation function call
+
+
   return 0;
 }

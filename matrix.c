@@ -15,19 +15,18 @@ typedef struct Matrix Matrix;
 Matrix* matrix_initilization(int width,int height, double array[width][height])
 {
     Matrix* new_matrix = (Matrix*)malloc(sizeof(Matrix));
-    new_matrix->width = width;
     new_matrix->height = height;
+    new_matrix->width = width;
     
 
 
     double **new_2d_array = (double**)malloc(height * sizeof(double*));
     for (int i = 0; i < height; i++)
     {
-        double *new_array = (double*)malloc(width * sizeof(double));
-        new_2d_array[i] = new_array;
+        new_2d_array[i] = (double*)malloc(width * sizeof(double));
         for (int j = 0; j < width; j++)
         {
-            new_array[j] = array[i][j];
+        new_2d_array[i][j] = array[i][j];
         }
     }
 
@@ -41,20 +40,47 @@ void print_matrix(Matrix* matrix)
     {
         for (int j = 0; j < matrix->width; j++)
         {
-            printf("%f, ", matrix->two_dimension_array[i][j]);
+            printf("%.2f, ", matrix->two_dimension_array[i][j]);//.2f only keeps 2 values after the .
         }
         printf("\n");
     }
 }
+
+//How to get the value from a given position of the arrary
+double getMatrixElement(Matrix* m, int row, int col){
+    if (m ==NULL){
+    printf("This is null");
+    }
+    if (row < 0 || col < 0 || row >= m -> height || col >= m-> width){
+        printf("This is out of range \n");
+        return -1;
+        
+    }
+    printf("This has finished running \n");
+    return m->two_dimension_array[row][col];
+    
+
+}
+
 //I will always free memory I Malloc and I will only free Memory "I" malloc!
 void freeMatrix(Matrix* m){
-    if (m != NULL){
-        //frees everything malloc'd
-        for (int i=0; i<m->height; i++){
-            free(m->two_dimension_array[i]);
+    if (m = NULL){
+        return;
+        help(1);
+    }
+    if (m->two_dimension_array != NULL) {
+    //frees everything malloc'd
+    help(3);
+    for (int i=0; i<m->height; i++){
+        if (m->two_dimension_array != NULL){
+        help(4);
+        free(m->two_dimension_array[i]);
+        m->two_dimension_array[i] = NULL;
         }
-        //Free pointers
-        free(m->two_dimension_array);
+        help(5);
+    }
+    //Free pointers
+    free(m->two_dimension_array);
+    }
         free(m);
     }
-}

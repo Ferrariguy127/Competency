@@ -3,13 +3,16 @@
 
 struct Matrix 
 {
-    int height;
     int width;
+    int height;
     double **two_dimension_array;
 };
 
 typedef struct Matrix Matrix;
-Matrix* matrix_initilization(int height, int width, double array[height][width]);
+Matrix* matrix_initilization(int width, int height, double array[width][height]);
 void print_matrix(Matrix* matrix);
 
+double getMatrixElement(const Matrix* m, int row, int col);
+
+void freeMatrix(Matrix* m);
 #endif
