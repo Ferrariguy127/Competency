@@ -50,11 +50,12 @@ void print_matrix(Matrix* matrix)
 double getMatrixElement(Matrix* m, int row, int col){
     if (m ==NULL){
     printf("This is null");
+    return -2;
     }
+
     if (row < 0 || col < 0 || row >= m -> height || col >= m-> width){
-        printf("This is out of range \n");
+        printf("This is out of range. Row: %d, Col: %d \n");
         return -1;
-        
     }
     printf("This has finished running \n");
     return m->two_dimension_array[row][col];
@@ -65,8 +66,9 @@ double getMatrixElement(Matrix* m, int row, int col){
 //I will always free memory I Malloc and I will only free Memory "I" malloc!
 void freeMatrix(Matrix* m){
     if (m = NULL){
-        return;
         help(1);
+        return;
+        
     }
     if (m->two_dimension_array != NULL) {
     //frees everything malloc'd

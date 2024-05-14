@@ -25,7 +25,7 @@ int main(void)
   print_matrix(matrix);
 
   //Function for getting value at set position
-  printf("Element at (1,1): %.2f\n", getMatrixElement(matrix_array1, 1, 1));
+  printf("Element at (1,1): %.2f\n", getMatrixElement(matrix_array1, 0, 0));
   printf("This line works\n");
   //freeMatrix(matrix_array1);
 
@@ -38,5 +38,5 @@ int main(void)
 //matrix rotation function call
 
 
-  return 0;
+  return;
 }
