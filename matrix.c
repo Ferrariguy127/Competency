@@ -21,11 +21,10 @@ Matrix* matrix_initilization(int width,int height, double array[width][height])
 
 
     double **new_2d_array = (double**)malloc(height * sizeof(double*));
-    for (int i = 0; i < height; i++)
-    {
+    for (int i = 0; i < height; i++){
+
         new_2d_array[i] = (double*)malloc(width * sizeof(double));
-        for (int j = 0; j < width; j++)
-        {
+            for (int j = 0; j < width; j++){
         new_2d_array[i][j] = array[i][j];
         }
     }
@@ -49,16 +48,19 @@ void print_matrix(Matrix* matrix)
 //How to get the value from a given position of the arrary
 double getMatrixElement(Matrix* m, int row, int col){
     if (m ==NULL){
-    printf("This is null");
-    return -2;
+        printf("This is null");
+        return -2;
     }
 
-    if (row < 0 || col < 0 || row >= m -> height || col >= m-> width){
-        printf("This is out of range. Row: %d, Col: %d \n");
-        return -1;
+    printf("row=%d, col=%d, height=%d", row, col, m->height, m->width);
+    
+    if (row < 0 || col < 0 || row >= m->height || col >= m->width){
+
+            printf("This is out of range. row: %d, col: %d \n");
+            return -1;
     }
-    printf("This has finished running \n");
-    return m->two_dimension_array[row][col];
+        printf("This has finished running \n");
+        return m->two_dimension_array[row][col];
     
 
 }
