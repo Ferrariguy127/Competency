@@ -38,6 +38,10 @@ int main(void)
   //Function for Row Swapping:
   //double NewRowValues(Matrix *new_matrix, int row, double values);
   printf("",NewRowValues(matrix, 1, 1));
+  printf("",NewRowValues(matrix, 1, 0));
+  printf("",NewRowValues(matrix, 0, 1));
+  printf("",NewRowValues(matrix, 0, 0));
+  
 
   //Funciton for Col Swapping:
   //double NewColValues(Matrix *new_matrix, int col, double values);
