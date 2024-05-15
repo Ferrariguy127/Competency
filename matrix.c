@@ -99,6 +99,30 @@ double GetElementCol(Matrix *new_matrix, int col){
         printf("%.2f\t", new_matrix->data[i][col]);
     }
 }
+//This shouuld fill the values in a given row to be that of the input
+double NewRowValues(Matrix *new_matrix, int row, double values){
+    if (new_matrix==NULL || row < 0 || row>= new_matrix->row){
+        printf("This didn't work due to improper bounds.");
+        }
+        printf("New row down as follows\n");
+        for(int j=0; j<new_matrix->row; j++){
+            new_matrix->data[row][j] = values;
+            printf("%.2f\t", new_matrix->data[row][j]);
+        }//Note the position of [row][j], if swapped it runs similar to [i][col]
+        printf("\n");
+    }
+//This is the Column value swapping funciton
+double NewColValues(Matrix *new_matrix, int col, double values){
+    if (new_matrix==NULL || col<0 || col>= new_matrix->col){
+        printf("The selected input is outside this programs bounds");
+    }
+    printf("New Column as follows\n");
+    for (int i=0; i<new_matrix->col; i++){
+        new_matrix->data[i][col]=values;
+        printf("%.2f\n", new_matrix->data[i][col]);
+    }
+    printf("\n");
+}
 
 //I will always free memory I Malloc and I will only free Memory "I" malloc!
 void freeMatrix(Matrix *new_matrix){

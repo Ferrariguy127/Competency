@@ -35,6 +35,13 @@ int main(void)
   //Function to get the value at a given Column
   printf("\n", GetElementCol(matrix, 1));
 
+  //Function for Row Swapping:
+  //double NewRowValues(Matrix *new_matrix, int row, double values);
+  printf("",NewRowValues(matrix, 1, 1));
+
+  //Funciton for Col Swapping:
+  //double NewColValues(Matrix *new_matrix, int col, double values);
+  printf("", NewColValues(matrix2,1,1));
 
 //Matrix addition function call
 

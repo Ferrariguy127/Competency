@@ -16,5 +16,7 @@ void print_matrix(Matrix* matrix);
 double getMatrixElement(const Matrix* m, int row, int col);
 double GetElementrow(Matrix *new_matrix, int row);
 double GetElementCol(Matrix *new_matrix, int col);
+double NewRowValues(Matrix *new_matrix, int row, double values);
+double NewColValues(Matrix *new_matrix, int col, double values);
 void freeMatrix(Matrix* m);
 #endif
