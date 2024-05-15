@@ -5,86 +5,90 @@ void help(int num){printf("This works %d\n", num);}
 
 struct Matrix 
 {
-    int height;
-    int width;
-    double **two_dimension_array;
+    int row;
+    int col;
+    double **data;
 };
 
 typedef struct Matrix Matrix;
 
-Matrix* matrix_initilization(int width,int height, double array[width][height])
+Matrix* matrix_initilization(int rows,int columns)
 {
-    Matrix* new_matrix = (Matrix*)malloc(sizeof(Matrix));
-    new_matrix->height = height;
-    new_matrix->width = width;
-    
+    Matrix *new_matrix = (Matrix*)malloc(sizeof(Matrix));
 
-
-    double **new_2d_array = (double**)malloc(height * sizeof(double*));
-    for (int i = 0; i < height; i++){
-
-        new_2d_array[i] = (double*)malloc(width * sizeof(double));
-            for (int j = 0; j < width; j++){
-        new_2d_array[i][j] = array[i][j];
-        }
+    if (new_matrix == NULL){
+        printf("Matrix failed to initialize.\n");
     }
 
-    new_matrix->two_dimension_array=new_2d_array;
+    new_matrix->row = rows;
+    new_matrix->col = columns;
+    
+    //Allocation system
+    new_matrix->data = (double**)malloc(rows * sizeof(double*));
+    if (new_matrix->data == NULL){
+        printf("Matrix failed to allocate memory.\n");
+    }
+
+    //Allocates pointers
+    for (int i = 0; i < rows; i++){
+        new_matrix->data[i] = (double*)malloc(columns * sizeof(double));
+        if (new_matrix->data[i] == NULL){
+            printf("Failed to allocate memory within Matrix.\n");
+        }
+    }
     return new_matrix;
+}
+void FillMatrixData(Matrix *new_matrix, double data[][new_matrix->col]){
+    for (int i=0; i< new_matrix->row; i++){
+        for (int j=0; j<new_matrix->col; j++){
+            new_matrix->data[i][j]=data[i][j];
+        }
+    }
 }
 //Simply put this will take the matrix struct from above and print it out
 void print_matrix(Matrix* matrix)
 {
-    for (int i = 0; i < matrix->height; i++)
+    for (int i = 0; i < matrix->row; i++)
     {
-        for (int j = 0; j < matrix->width; j++)
+        for (int j = 0; j < matrix->col; j++)
         {
-            printf("%.2f, ", matrix->two_dimension_array[i][j]);//.2f only keeps 2 values after the .
+            printf("%.2f, ", matrix->data[i][j]);//.2f only keeps 2 values after the .
         }
         printf("\n");
     }
 }
 
 //How to get the value from a given position of the arrary
-double getMatrixElement(Matrix* m, int row, int col){
+double getMatrixElement(Matrix *m, int row, int col){
     if (m ==NULL){
         printf("This is null");
         return -2;
     }
 
-    printf("row=%d, col=%d, height=%d", row, col, m->height, m->width);
-    
-    if (row < 0 || col < 0 || row >= m->height || col >= m->width){
+    printf("row=%d, col=%d, row=%d", row, col, m->row, m->col);
 
-            printf("This is out of range. row: %d, col: %d \n");
+    if (row < 0 || col < 0 || row >= m->row || col >= m->col){
+
+            printf("This is out of range. row:%d, col:%d \n");
             return -1;
     }
         printf("This has finished running \n");
-        return m->two_dimension_array[row][col];
+        return m->data[row][col];
     
 
 }
 
 //I will always free memory I Malloc and I will only free Memory "I" malloc!
-void freeMatrix(Matrix* m){
-    if (m = NULL){
-        help(1);
-        return;
-        
-    }
-    if (m->two_dimension_array != NULL) {
+void freeMatrix(Matrix *new_matrix){
+    if (new_matrix->data != NULL) {
     //frees everything malloc'd
-    help(3);
-    for (int i=0; i<m->height; i++){
-        if (m->two_dimension_array != NULL){
-        help(4);
-        free(m->two_dimension_array[i]);
-        m->two_dimension_array[i] = NULL;
-        }
-        help(5);
+    for (int i=0; i<new_matrix->row; i++){        
+        free(new_matrix->data[i]);
     }
     //Free pointers
-    free(m->two_dimension_array);
+    free(new_matrix->data);
+    
+        free(new_matrix);
+        printf("Memory has been cleared.\n");
     }
-        free(m);
-    }
+}

@@ -11,23 +11,25 @@ int main(void)
     {3, 3, 1},
     {4, 2, 4}
   };
-  double matrix_array2[3][4] = {
+  double matrix_array2[4][3] = {
     {1, 2, 3},
     {4, 5, 6},
     {7, 8, 9},
     {1, 2, 3}
   };
   
-  Matrix* matrix = matrix_initilization(3, 3, matrix_array1);
+  Matrix *matrix = matrix_initilization(3, 3);
+  FillMatrixData(matrix, matrix_array1);
   print_matrix(matrix);
   printf("\n");
-  Matrix* matrix2 = matrix_initilization(3, 4, matrix_array2);
-  print_matrix(matrix);
+  Matrix *matrix2 = matrix_initilization(4, 3);
+  FillMatrixData(matrix2, matrix_array2);
+  print_matrix(matrix2);
 
   //Function for getting value at set position
   printf("Element at (1,1): %.2f\n", getMatrixElement(matrix_array1, 1, 1));
   printf("This line works\n");
-  freeMatrix(matrix_array1);
+  freeMatrix(matrix);
 
 //Matrix addition function call
 
@@ -38,5 +40,4 @@ int main(void)
 //matrix rotation function call
 
 
-  return;
 }
