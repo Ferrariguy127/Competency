@@ -79,7 +79,26 @@ double getMatrixElement(Matrix *new_matrix, int row, int col){
 
 }
 
-
+//This should be able to pull the values of a single element in the matrix
+double GetElementrow(Matrix *new_matrix, int row){
+    if (new_matrix==NULL || row < 0 || row >= new_matrix->row){
+        printf("This row does not exist within these bounds");
+    }
+    printf("The elements found in row  are:");
+    for (int j=0; j < new_matrix->col; j++){
+        printf(" %.2f\t",new_matrix->data[row][j]);
+    }
+}
+//This should be able to pull the values from a single column in the matrix
+double GetElementCol(Matrix *new_matrix, int col){
+    if (new_matrix==NULL || col < 0|| col >= new_matrix->col){
+        printf("This input is not in the bounds of this matrix");
+    }
+    printf("The elements in that column are: ");
+    for (int i=0; i< new_matrix->row; i++){
+        printf("%.2f\t", new_matrix->data[i][col]);
+    }
+}
 
 //I will always free memory I Malloc and I will only free Memory "I" malloc!
 void freeMatrix(Matrix *new_matrix){

@@ -28,7 +28,13 @@ int main(void)
 
   //Function for getting value at set position
   printf("Element at (1,1): %.2f\n", getMatrixElement(matrix, 1, 1));
+
+  //Function for getting the value at a given Row
+  printf("\n", GetElementrow(matrix, 1));
   
+  //Function to get the value at a given Column
+  printf("\n", GetElementCol(matrix, 1));
+
 
 //Matrix addition function call
 
