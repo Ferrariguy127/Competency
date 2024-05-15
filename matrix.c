@@ -59,24 +59,27 @@ void print_matrix(Matrix* matrix)
 }
 
 //How to get the value from a given position of the arrary
-double getMatrixElement(Matrix *m, int row, int col){
-    if (m ==NULL){
+double getMatrixElement(Matrix *new_matrix, int row, int col){
+    if (new_matrix ==NULL){
         printf("This is null");
-        return -2;
+        return -1;
     }
 
-    printf("row=%d, col=%d, row=%d", row, col, m->row, m->col);
+    //printf("row=%d, col=%d, row=%d", row, col, new_matrix->row, new_matrix->col);
+    //this should get a debug flag on it later but need progress first.
 
-    if (row < 0 || col < 0 || row >= m->row || col >= m->col){
+    if (row < 0 || col < 0 || row >= new_matrix->row || col >= new_matrix->col){
 
             printf("This is out of range. row:%d, col:%d \n");
             return -1;
     }
-        printf("This has finished running \n");
-        return m->data[row][col];
+        //printf("This has finished running \n");This was a test statement for debugging.
+        return new_matrix->data[row][col];
     
 
 }
+
+
 
 //I will always free memory I Malloc and I will only free Memory "I" malloc!
 void freeMatrix(Matrix *new_matrix){
