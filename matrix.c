@@ -18,6 +18,7 @@ Matrix* matrix_initilization(int rows,int columns)
 
     if (new_matrix == NULL){
         printf("Matrix failed to initialize.\n");
+        exit(1);
     }
 
     new_matrix->row = rows;
@@ -27,6 +28,7 @@ Matrix* matrix_initilization(int rows,int columns)
     new_matrix->data = (double**)malloc(rows * sizeof(double*));
     if (new_matrix->data == NULL){
         printf("Matrix failed to allocate memory.\n");
+        exit(1);
     }
 
     //Allocates pointers
@@ -34,6 +36,7 @@ Matrix* matrix_initilization(int rows,int columns)
         new_matrix->data[i] = (double*)malloc(columns * sizeof(double));
         if (new_matrix->data[i] == NULL){
             printf("Failed to allocate memory within Matrix.\n");
+            exit(1);
         }
     }
     return new_matrix;
@@ -62,7 +65,7 @@ void print_matrix(Matrix* matrix)
 double getMatrixElement(Matrix *new_matrix, int row, int col){
     if (new_matrix ==NULL){
         printf("This is null");
-        return -1;
+        exit(1);
     }
 
     //printf("row=%d, col=%d, row=%d", row, col, new_matrix->row, new_matrix->col);
@@ -83,6 +86,7 @@ double getMatrixElement(Matrix *new_matrix, int row, int col){
 double GetElementrow(Matrix *new_matrix, int row){
     if (new_matrix==NULL || row < 0 || row >= new_matrix->row){
         printf("This row does not exist within these bounds");
+        exit(1);
     }
     printf("The elements found in row  are:");
     for (int j=0; j < new_matrix->col; j++){
@@ -93,6 +97,7 @@ double GetElementrow(Matrix *new_matrix, int row){
 double GetElementCol(Matrix *new_matrix, int col){
     if (new_matrix==NULL || col < 0|| col >= new_matrix->col){
         printf("This input is not in the bounds of this matrix");
+        exit(1);
     }
     printf("The elements in that column are: ");
     for (int i=0; i< new_matrix->row; i++){
@@ -103,6 +108,7 @@ double GetElementCol(Matrix *new_matrix, int col){
 double NewRowValues(Matrix *new_matrix, int row, double values){
     if (new_matrix==NULL || row < 0 || row>= new_matrix->row){
         printf("This didn't work due to improper bounds.");
+        exit(1);
         }
         printf("New row down as follows\n");
         for(int j=0; j<new_matrix->row; j++){
@@ -115,6 +121,7 @@ double NewRowValues(Matrix *new_matrix, int row, double values){
 double NewColValues(Matrix *new_matrix, int col, double values){
     if (new_matrix==NULL || col<0 || col>= new_matrix->col){
         printf("The selected input is outside this programs bounds");
+        exit(1);
     }
     printf("New Column as follows\n");
     for (int i=0; i<new_matrix->col; i++){
@@ -122,6 +129,41 @@ double NewColValues(Matrix *new_matrix, int col, double values){
         printf("%.2f\n", new_matrix->data[i][col]);
     }
     printf("\n");
+}
+
+//Create a matrix from a given matrix (Subset)
+double **extractSubset(double **nm, int startRow, int startCol, int targetRow, int targetCol){
+    double **dest = (double **)malloc(targetRow * sizeof(double *));
+    if(!dest) return NULL; //should see if malloc fails and exit
+
+
+    for (int i=0; i< targetRow; i++){
+        dest[i] = (double *)malloc(targetCol * sizeof(double));
+        if (!dest[i]){
+            for (int j =0; j<i; j++){
+                free(dest[j]);
+            }
+            free(dest);
+            return NULL;
+        }
+    }
+
+    //Copy the values for the new matrix
+    for (int i =0; i<targetRow; i++){
+        for (int j=0; j<targetCol; j++){
+            dest[i][j] = nm[startRow+i][startCol+j];
+        }
+    }
+    return dest;
+}
+void printSubset(double **matrix, int row, int col){
+    for (int i=0; i< row; i++){
+        for(int j=0; j<col; j++){
+        printf("This is the new subset");
+        printf("%f", matrix[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 //I will always free memory I Malloc and I will only free Memory "I" malloc!
