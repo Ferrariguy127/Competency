@@ -7,9 +7,9 @@ int main(void)
 {
   //This function is where the user or developer will adjust the size of the matrix and the values used
   double matrix_array1[3][3] = {
-    {4, 3, 1},
-    {3, 3, 1},
-    {4, 2, 4}
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
   };
   double matrix_array2[4][3] = {
     {1, 2, 3},
@@ -17,6 +17,12 @@ int main(void)
     {7, 8, 9},
     {1, 2, 3}
   };
+  double matrix_array3[3][3] = {
+    {9, 8, 7},
+    {6, 5, 4},
+    {3, 2, 1}
+  };
+
   
   Matrix *matrix = matrix_initilization(3, 3);
   FillMatrixData(matrix, matrix_array1);
@@ -25,6 +31,11 @@ int main(void)
   Matrix *matrix2 = matrix_initilization(4, 3);
   FillMatrixData(matrix2, matrix_array2);
   print_matrix(matrix2);
+  printf("\n");
+  Matrix *matrix3 = matrix_initilization(3, 3);
+  FillMatrixData(matrix3, matrix_array3);
+  print_matrix(matrix3);
+  
 
   //Function for getting value at set position
   printf("Element at (1,1): %.2f\n", getMatrixElement(matrix, 1, 1));
@@ -42,13 +53,19 @@ int main(void)
   printf("", NewColValues(matrix2,1,1));
 
   //Function for matrix subset:
-  printSubset(matrix2,0,0);
-  //double **subset = extractSubset(matrix,0,0,2,2);
+  double **sourceMatrix = matrix_initilization(4,4);
+  if (sourceMatrix == NULL){
+    printf("Failed to allocate properly and will now exit");
+    exit(1);
+  }
+
+  printf(sourceMatrix);
 
 //Matrix addition function call
+  printf("", matrix_addition(matrix,matrix3));
 
 //matrix subtraction function call
-
+  printf("", matrix_subtraction(matrix,matrix3));
 //matrix multiplication function call
 
 //matrix rotation function call
@@ -57,5 +74,5 @@ int main(void)
 
   freeMatrix(matrix);
   freeMatrix(matrix2);
-
+  freeMatrix(matrix3);
 }

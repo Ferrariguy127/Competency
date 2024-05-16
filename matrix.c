@@ -11,6 +11,9 @@ struct Matrix
 };
 
 typedef struct Matrix Matrix;
+//This function will create an empty matrix of the size specified by the user input in main
+//The matrixes I have written are for testing purposes to save time instead of asking for sizes and values each time.
+
 
 Matrix* matrix_initilization(int rows,int columns)
 {
@@ -41,6 +44,7 @@ Matrix* matrix_initilization(int rows,int columns)
     }
     return new_matrix;
 }
+//This function will take the variables I have listed as matrix1 and matrix2 and populate their values into the matrix we just made
 void FillMatrixData(Matrix *new_matrix, double data[][new_matrix->col]){
     for (int i=0; i< new_matrix->row; i++){
         for (int j=0; j<new_matrix->col; j++){
@@ -68,13 +72,12 @@ double getMatrixElement(Matrix *new_matrix, int row, int col){
         exit(1);
     }
 
-    //printf("row=%d, col=%d, row=%d", row, col, new_matrix->row, new_matrix->col);
     //this should get a debug flag on it later but need progress first.
 
     if (row < 0 || col < 0 || row >= new_matrix->row || col >= new_matrix->col){
 
             printf("This is out of range. row:%d, col:%d \n");
-            return -1;
+            exit(1);
     }
         //printf("This has finished running \n");This was a test statement for debugging.
         return new_matrix->data[row][col];
@@ -130,9 +133,15 @@ double NewColValues(Matrix *new_matrix, int col, double values){
     }
     printf("\n");
 }
-
+/*
 //Create a matrix from a given matrix (Subset)
-double **extractSubset(double **nm, int startRow, int startCol, int targetRow, int targetCol){
+void  createMatrixSubset(double **nm, int startRow, int startCol, int targetRow, int targetCol, double **subsetMatrix){
+    for (int i=0; i< targetRow; i++){
+        for (int j=0; j<targetCol; j++){
+            subsetMatrix[i][j]=nm[startRow+i][startCol+j];
+        }
+    }
+}    
     double **dest = (double **)malloc(targetRow * sizeof(double *));
     if(!dest) return NULL; //should see if malloc fails and exit
 
@@ -156,6 +165,7 @@ double **extractSubset(double **nm, int startRow, int startCol, int targetRow, i
     }
     return dest;
 }
+
 void printSubset(double **matrix, int row, int col){
     for (int i=0; i< row; i++){
         for(int j=0; j<col; j++){
@@ -165,7 +175,45 @@ void printSubset(double **matrix, int row, int col){
         printf("\n");
     }
 }
+*/
+//Function for adding two matrices and populating a third with its result
+Matrix* matrix_addition(Matrix *m1, Matrix *m2){
+    if (m1->row != m2->row || m1->col != m2->col){
+        printf("Incompatible sized Matrices");
+        return NULL;
+        exit(1);
+    }
+    printf("The new matrix after addition is: \n");
+    Matrix* matrix3 = matrix_initilization(m1->row, m1->col);
+    for (int i=0; i<m1->col; i++){
+        for (int j=0; j<m1->row; j++){
+            matrix3->data[i][j] = m1->data[i][j] + m2->data[i][j];
+        }
+    }
+    print_matrix(matrix3);
+    freeMatrix (matrix3);
+    return matrix3;
+    
+}
 
+Matrix* matrix_subtraction(Matrix *m1, Matrix *m2){
+    if (m1->row != m2->row || m1->col != m2->col){
+        printf("Incompatible sized Matrices");
+        return NULL;
+        exit(1);
+    }
+    printf("The new matrix after subtraction is: \n");
+    Matrix* matrix4 = matrix_initilization(m1->row, m1->col);
+    for (int i=0; i<m1->col; i++){
+        for (int j=0; j<m1->row; j++){
+            matrix4->data[i][j] = m1->data[i][j] - m2->data[i][j];
+        }
+    }
+    print_matrix(matrix4);
+    freeMatrix(matrix4);
+    return matrix4;
+    
+}
 //I will always free memory I Malloc and I will only free Memory "I" malloc!
 void freeMatrix(Matrix *new_matrix){
     if (new_matrix->data != NULL) {
